@@ -82,8 +82,6 @@ class Ui_MainWindow(object):
         self.pushButton.setFont(font)
         self.pushButton.setStyleSheet("background-color:rgb(29,198,144);\n"
 "border-radius: 10px;\n"
-"transition:l 4s;\n"
-"-webkit-transition: 4s;\n"
 "}\n"
 "\n"
 "\n"
@@ -136,8 +134,6 @@ class Ui_MainWindow(object):
         self.pushButton_2.setFont(font)
         self.pushButton_2.setStyleSheet("background-color:rgb(255,79,40);\n"
 "border-radius: 10px;\n"
-"transition:l 4s;\n"
-"-webkit-transition: 4s;\n"
 "}\n"
 "\n"
 "\n"
