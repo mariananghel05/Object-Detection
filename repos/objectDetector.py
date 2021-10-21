@@ -4,28 +4,27 @@ import os
 import time
 from windowcapture import WindowCapture
 import win32api, win32gui, win32con
+from Draw import Draw
 
 
-class Haar:
-    def __init__(self, WindowName, Model):
-    	self.wincap = WindowCapture('Aeldra')
-    	self.Model = cv2.CascadeClassifier(Model)
+wincap = WindowCapture('Aeldra')
+Model = cv2.CascadeClassifier("Models/cascade.xml")
+loop_time = time.time()
 
-    def setModel(self, Model):
-    	self.Model = cv2.CascadeClassifier(Model)
+while(True):
+    screen = wincap.get_screenshot()
+    detection = Model.detectMultiScale(screen, 1.15, 2)
 
-    def setWindow(self, WindowName):
-    	self.wincap = WindowCapture('Aeldra')
+    draw = Draw()
+    draw.DrawRectangle(screen, detection)
+    draw.DrawPoint(screen, detection, 1)
+    draw.putText(screen, detection, "Devil Metin")
 
-    def getScreenshot(self):
-        self.screenshot = self.wincap.get_screenshot() 
-
-    def detect(self):
-    	self.rectangles = self.Model.detectMultiScale(self.screenshot, 1.5, 1)
-
-   
-
-har = Haar('Aeldra', 'Models/cascade.xml')
-har.getScreenshot()
-har.detect()
-print(har.rectangles)
+    print('FPS {}'.format(1 / (time.time() - loop_time)))
+    loop_time = time.time()
+    
+    cv2.imshow('Metin2', screen)
+    key = cv2.waitKey(1)
+    if key == ord('q'):
+        cv2.destroyAllWindows()
+        break
